@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List - Rendy</title>
+
+    <!-- CSS External -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body>
+
+    <!-- Hero Website -->
+    <header>
+        <h1 class="text-4xl font-bold">Todo List</h1>
+    </header>
+
+    <!-- Main Content, Todo List Form, List Todo -->
+    <main>
+        <form>
+            <input type="text" id="task-input" placeholder="Add a new task" class="border p-2 rounded">
+            <input type="date" id="due-date-input" class="border p-2 rounded">
+            <button type="button" onclick="validateForm();" class="bg-blue-500 text-white p-[8px] rounded">Add</button>
+        </form>
+
+        <!-- Action button section -->
+        <section>
+            <button class="bg-green-500 text-white p-2 rounded">Filter</button>
+            <button onclick="deleteAll()" class="bg-red-500 text-white p-2 rounded">Delete All</button>
+        </section>
+
+        <!-- List of Task -->
+        <section>
+            <header>
+                <h2 class="text-2xl font-semibold">Tasks</h2>
+            </header>
+
+            <ul class="my-4" id="task-list">
+                <li class="border-b py-2">Task 1</li>
+                <li class="border-b py-2">Task 2</li>
+                <li class="border-b py-2">Task 3</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <span>&copy; 2025 Rendy Angger. All rights reserved.</span>
+    </footer>
+
+    <!-- JS External -->
+    <script src="js/script.js"></script>
+</body>
+
+</html>
