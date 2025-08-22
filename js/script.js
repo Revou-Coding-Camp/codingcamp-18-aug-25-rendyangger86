@@ -1,49 +1,49 @@
-// JavaScript Todo List Application
+// Aplikasi Daftar Tugas JavaScript
 console.log("Todo List App Initialized");
 
-// Global variables
+// Variabel global
 let listTodo = [];
 
-// DOM Elements
+// Elemen DOM
 let taskInput, dueDateInput, addTaskBtn, deleteAllBtn, searchInput, filterSelect, taskList, noTasks;
 let totalTasksEl, completedTasksEl, pendingTasksEl, progressEl;
 
-// Initialize the app
+// Inisialisasi aplikasi
 function init() {
     console.log("Initializing Todo App...");
     
-    // Get DOM elements
+    // Mendapatkan elemen DOM
     getDOMElements();
     
-    // Setup event listeners
+    // Mengatur pendengar acara
     setupEventListeners();
     
-    // Update initial statistics
+    // Perbarui statistik awal
     updateStatistics();
     
-    // Render initial todo list
+    // Render daftar tugas awal
     renderTodoList();
     
     console.log("Todo App Ready!");
 }
 
-// Get all DOM elements
+// Mendapatkan semua elemen DOM
 function getDOMElements() {
-    // Form elements
+    // Elemen formulir
     taskInput = document.getElementById('task-input');
     dueDateInput = document.getElementById('due-date-input');
     addTaskBtn = document.getElementById('add-task-btn');
     deleteAllBtn = document.getElementById('delete-all-btn');
     
-    // Filter elements
+    // Elemen filter
     searchInput = document.getElementById('search-input');
     filterSelect = document.getElementById('filter-select');
     
-    // Display elements
+    // Elemen tampilan
     taskList = document.getElementById('task-list');
     noTasks = document.getElementById('no-tasks');
     
-    // Statistics elements
+    // Elemen statistik
     totalTasksEl = document.getElementById('total-tasks');
     completedTasksEl = document.getElementById('completed-tasks');
     pendingTasksEl = document.getElementById('pending-tasks');
@@ -52,36 +52,36 @@ function getDOMElements() {
     console.log("DOM elements loaded");
 }
 
-// Setup all event listeners
+// Konfigurasikan semua pendengar acara
 function setupEventListeners() {
     if (!addTaskBtn || !deleteAllBtn || !searchInput || !filterSelect || !taskInput) {
         console.error("Some DOM elements not found!");
         return;
     }
     
-    // Add task button
+    // Tombol Tambah Tugas
     addTaskBtn.addEventListener('click', function(e) {
         e.preventDefault();
         validateForm();
     });
     
-    // Delete all button
+    // Hapus Semua Tombol
     deleteAllBtn.addEventListener('click', function(e) {
         e.preventDefault();
         deleteAll();
     });
     
-    // Search input
+    // Kontak Pencarian
     searchInput.addEventListener('input', function() {
         filterTasks();
     });
     
-    // Filter select
+    // Pilih Filter
     filterSelect.addEventListener('change', function() {
         filterTasks();
     });
     
-    // Enter key support for task input
+    // Dukungan tombol Enter untuk masukan tugas
     taskInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
             e.preventDefault();
@@ -89,7 +89,7 @@ function setupEventListeners() {
         }
     });
     
-    // Form submit prevention
+    // Pencegahan pengiriman formulir
     const form = document.getElementById('todo-form');
     if (form) {
         form.addEventListener('submit', function(e) {
@@ -101,7 +101,7 @@ function setupEventListeners() {
     console.log("Event listeners setup complete");
 }
 
-// Validate Form Inputs
+// Validasi Masukan Formulir
 function validateForm() {
     console.log("Validating form...");
     
@@ -121,13 +121,13 @@ function validateForm() {
     console.log("Form valid, adding task:", taskValue, dateValue);
     addTodo(taskValue, dateValue);
     
-    // Clear form
+    // Bersihkan formulir setelah menambahkan tugas
     taskInput.value = '';
     dueDateInput.value = '';
     taskInput.focus();
 }
 
-// Add a new Todo
+// Tambahkan tugas baru
 function addTodo(task, dueDate) {
     console.log("Adding new todo:", task, dueDate);
     
@@ -146,7 +146,7 @@ function addTodo(task, dueDate) {
     renderTodoList();
 }
 
-// Toggle task completion
+// Aktifkan/nonaktifkan penyelesaian tugas
 function toggleTask(id) {
     console.log("Toggling task:", id);
     
@@ -159,7 +159,7 @@ function toggleTask(id) {
     }
 }
 
-// Delete a single task
+// Hapus satu tugas
 function deleteTask(id) {
     console.log("Deleting task:", id);
     
@@ -173,7 +173,7 @@ function deleteTask(id) {
     }
 }
 
-// Delete all Todos
+// Hapus semua tugas
 function deleteAll() {
     console.log("Delete all requested");
     
@@ -190,7 +190,7 @@ function deleteAll() {
     }
 }
 
-// Update statistics
+// Perbarui statistik
 function updateStatistics() {
     const total = listTodo.length;
     const completed = listTodo.filter(item => item.completed).length;
@@ -205,7 +205,7 @@ function updateStatistics() {
     console.log("Statistics updated:", { total, completed, pending, progress });
 }
 
-// Filter tasks based on search and status
+// Filter tugas berdasarkan pencarian dan status
 function filterTasks() {
     if (!searchInput || !filterSelect) {
         console.error("Filter elements not found!");
@@ -217,14 +217,14 @@ function filterTasks() {
     
     let filteredTodos = [...listTodo];
     
-    // Filter by search term
+    // Filter berdasarkan kata kunci pencarian
     if (searchTerm) {
         filteredTodos = filteredTodos.filter(todo => 
             todo.task.toLowerCase().includes(searchTerm)
         );
     }
     
-    // Filter by status
+    // Filter berdasarkan status
     if (filterStatus === 'completed') {
         filteredTodos = filteredTodos.filter(todo => todo.completed);
     } else if (filterStatus === 'pending') {
@@ -235,7 +235,7 @@ function filterTasks() {
     renderFilteredTodoList(filteredTodos);
 }
 
-// Render filtered todo list
+// Render daftar tugas yang difilter
 function renderFilteredTodoList(todos) {
     if (!taskList || !noTasks) {
         console.error("Display elements not found!");
@@ -282,13 +282,13 @@ function renderFilteredTodoList(todos) {
         taskList.appendChild(taskItem);
     });
     
-    // Add event listeners for dynamically created elements
+    // Tambahkan pendengar acara (event listeners) untuk elemen yang dibuat secara dinamis.
     addTaskEventListeners();
 }
 
-// Add event listeners for task items (checkboxes and delete buttons)
+// Tambahkan pendengar acara (event listeners) untuk item tugas (kotak centang dan tombol hapus)
 function addTaskEventListeners() {
-    // Checkbox event listeners
+    // Pendengar acara kotak centang
     const checkboxes = document.querySelectorAll('.task-checkbox');
     checkboxes.forEach(function(checkbox) {
         checkbox.addEventListener('change', function() {
@@ -297,7 +297,7 @@ function addTaskEventListeners() {
         });
     });
     
-    // Delete button event listeners
+    // Pencatat peristiwa tombol Hapus
     const deleteButtons = document.querySelectorAll('.delete-task-btn');
     deleteButtons.forEach(function(button) {
         button.addEventListener('click', function() {
@@ -307,12 +307,12 @@ function addTaskEventListeners() {
     });
 }
 
-// Render the complete Todo List
+// Render daftar tugas lengkap
 function renderTodoList() {
     renderFilteredTodoList(listTodo);
 }
 
-// Format date for display
+// Format tanggal untuk tampilan
 function formatDate(dateString) {
     try {
         const date = new Date(dateString);
@@ -327,20 +327,20 @@ function formatDate(dateString) {
     }
 }
 
-// Escape HTML to prevent XSS
+// Mengenkode HTML untuk mencegah serangan XSS
 function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
 }
 
-// Initialize the app when DOM is loaded
+// Inisialisasi aplikasi saat DOM dimuat
 document.addEventListener('DOMContentLoaded', function() {
     console.log("DOM loaded, initializing app...");
     init();
 });
 
-// Handle page errors
+// Tangani kesalahan halaman
 window.addEventListener('error', function(e) {
     console.error("JavaScript Error:", e.error);
 });
